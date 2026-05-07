@@ -6,52 +6,72 @@ const supabaseClient = supabase.createClient(
   SUPABASE_KEY
 );
 console.log("Supabase Connected");
+
+
+
 async function saveCustomer() {
 
-  const token = document.getElementById("token").value;
-  const ladyName = document.getElementById("ladyName").value;
-  const husbandName = document.getElementById("husbandName").value;
-  const phone = document.getElementById("phone").value;
-  const amount = parseFloat(document.getElementById("amount").value);
-  const issueDate = document.getElementById("issueDate").value;
+  try {
 
-  const monthlyDue = amount * 0.24;
+    console.log("Save Started");
 
-  const payments = [
-    {month: 1, paid: false},
-    {month: 2, paid: false},
-    {month: 3, paid: false},
-    {month: 4, paid: false},
-    {month: 5, paid: false}
-  ];
+    const token = document.getElementById("token").value;
+    const ladyName = document.getElementById("ladyName").value;
+    const husbandName = document.getElementById("husbandName").value;
+    const phone = document.getElementById("phone").value;
+    const amount = parseFloat(document.getElementById("amount").value);
+    const issueDate = document.getElementById("issueDate").value;
 
-  const { error } = await supabaseClient
-    .from("customers")
-    .insert([
-      {
-        token,
-        lady_name: ladyName,
-        husband_name: husbandName,
-        phone,
-        amount,
-        issue_date: issueDate,
-        monthly_due: monthlyDue,
-        status: "ACTIVE",
-        payments
-      }
-    ]);
+    const monthlyDue = amount * 0.24;
 
-  if (error) {
-    alert(error.message);
-    return;
+    const payments = [
+      {month: 1, paid: false},
+      {month: 2, paid: false},
+      {month: 3, paid: false},
+      {month: 4, paid: false},
+      {month: 5, paid: false}
+    ];
+
+    console.log("Before Insert");
+
+    const { data, error } = await supabaseClient
+      .from("customers")
+      .insert([
+        {
+          token,
+          lady_name: ladyName,
+          husband_name: husbandName,
+          phone,
+          amount,
+          issue_date: issueDate,
+          monthly_due: monthlyDue,
+          status: "ACTIVE",
+          payments
+        }
+      ]);
+
+    console.log("After Insert");
+
+    console.log("DATA:", data);
+
+    console.log("ERROR:", error);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Customer Saved Successfully!");
+
+    clearInputs();
+
+  } catch(err) {
+
+    console.log("MAIN ERROR:", err);
+
+    alert(err.message);
   }
-
-  alert("Customer Saved!");
-
-  clearInputs();
-
-  loadDashboard();
-  loadCollections();
+}
 }
   
 function clearInputs() {
