@@ -13,7 +13,8 @@ async function saveCustomer() {
 
   try {
 
-    console.log("Save Started");
+    document.getElementById("debugBox").innerText =
+      "Save Started";
 
     const token = document.getElementById("token").value;
     const ladyName = document.getElementById("ladyName").value;
@@ -32,7 +33,8 @@ async function saveCustomer() {
       {month: 5, paid: false}
     ];
 
-    console.log("Before Insert");
+    document.getElementById("debugBox").innerText =
+      "Before Insert";
 
     const { data, error } = await supabaseClient
       .from("customers")
@@ -50,30 +52,25 @@ async function saveCustomer() {
         }
       ]);
 
-    console.log("After Insert");
-
-    console.log("DATA:", data);
-
-    console.log("ERROR:", error);
-
     if (error) {
-      alert(error.message);
+
+      document.getElementById("debugBox").innerText =
+        "ERROR: " + error.message;
+
       return;
     }
 
-    alert("Customer Saved Successfully!");
+    document.getElementById("debugBox").innerText =
+      "SUCCESSFULLY SAVED";
 
     clearInputs();
 
   } catch(err) {
 
-    console.log("MAIN ERROR:", err);
-
-    alert(err.message);
+    document.getElementById("debugBox").innerText =
+      "MAIN ERROR: " + err.message;
   }
 }
-}
-  
 function clearInputs() {
   document.getElementById("token").value = "";
   document.getElementById("ladyName").value = "";
