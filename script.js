@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://jstzxrltbyzulwbhvrfq.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://jstzxrltbyzulwbhvrfq.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzdHp4cmx0Ynl6dWx3Ymh2cmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNjA4NDcsImV4cCI6MjA5MzczNjg0N30.vGSvVyX6TqJEycpkeZpnfdDq1hFiMp4QcYojjjZJCAY";
 
 const supabaseClient = supabase.createClient(
