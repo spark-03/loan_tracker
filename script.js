@@ -384,3 +384,17 @@ async function getCustomers() {
 
   return data;
 }
+async function getCustomers() {
+
+  const { data, error } = await supabaseClient
+    .from("customers")
+    .select("*")
+    .order("id", { ascending: true });
+
+  if (error) {
+    console.log(error);
+    return [];
+  }
+
+  return data;
+}
