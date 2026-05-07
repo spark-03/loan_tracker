@@ -163,9 +163,9 @@ function markPaid(token, paymentIndex) {
 
   searchCustomer();
 }
-function loadDashboard() {
+async function loadDashboard() {
 
-  let customers = JSON.parse(localStorage.getItem("customers")) || [];
+  let customers = await getCustomers();
 
   let totalCustomers = customers.length;
 
@@ -179,11 +179,11 @@ function loadDashboard() {
 
   let completedLoans = customers.filter(c => c.status === "COMPLETED").length;
 
-  let totalAmount = customers.reduce((sum, c) => sum + c.amount, 0);
+  let totalAmount = customers.reduce((sum, c) => sum + Number(c.amount), 0);
 
   let monthlyCollection = customers
     .filter(c => c.status === "ACTIVE")
-    .reduce((sum, c) => sum + c.monthlyDue, 0);
+    .reduce((sum, c) => sum + Number(c.monthly_due), 0);
 
   document.getElementById("totalCustomers").innerText = totalCustomers;
 
@@ -197,8 +197,8 @@ function loadDashboard() {
 
   document.getElementById("monthlyCollection").innerText = monthlyCollection;
 }
-loadDashboard();
-loadCollections();
+
+
 function loadCollections() {
 
   let customers = JSON.parse(localStorage.getItem("customers")) || [];
