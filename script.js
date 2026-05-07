@@ -7,27 +7,51 @@ const supabaseClient = supabase.createClient(
 );
 async function saveCustomer() {
 
-  await supabaseClient
-  .from("customers")
-  .insert([
-    {
-      token,
-      lady_name: ladyName,
-      husband_name: husbandName,
-      phone,
-      amount,
-      issue_date: issueDate,
-      monthly_due: monthlyDue,
-      status: "ACTIVE",
-      payments: [
-        {month: 1, paid: false},
-        {month: 2, paid: false},
-        {month: 3, paid: false},
-        {month: 4, paid: false},
-        {month: 5, paid: false}
-      ]
-    }
-  ]);
+  const token = document.getElementById("token").value;
+  const ladyName = document.getElementById("ladyName").value;
+  const husbandName = document.getElementById("husbandName").value;
+  const phone = document.getElementById("phone").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+  const issueDate = document.getElementById("issueDate").value;
+
+  const monthlyDue = amount * 0.24;
+
+  const payments = [
+    {month: 1, paid: false},
+    {month: 2, paid: false},
+    {month: 3, paid: false},
+    {month: 4, paid: false},
+    {month: 5, paid: false}
+  ];
+
+  const { error } = await supabaseClient
+    .from("customers")
+    .insert([
+      {
+        token,
+        lady_name: ladyName,
+        husband_name: husbandName,
+        phone,
+        amount,
+        issue_date: issueDate,
+        monthly_due: monthlyDue,
+        status: "ACTIVE",
+        payments
+      }
+    ]);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Customer Saved!");
+
+  clearInputs();
+
+  loadDashboard();
+  loadCollections();
+}
   customers.push(customer);
 
   localStorage.setItem("customers", JSON.stringify(customers));
