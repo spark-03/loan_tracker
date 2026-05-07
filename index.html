@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loan Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Loan Tracker</h1>
+
+    <div class="card">
+   <h2>Dashboard</h2>
+
+   <p>Total Customers: <span id="totalCustomers">0</span></p>
+   <p>Last Token: <span id="lastToken">0</span></p>
+
+   <p>Active Loans: <span id="activeLoans">0</span></p>
+
+   <p>Completed Loans: <span id="completedLoans">0</span></p>
+
+   <p>Total Amount Given: ₹<span id="totalAmount">0</span></p>
+
+   <p>Monthly Expected Collection: ₹<span id="monthlyCollection">0</span></p>
+   </div>
+      <h2>Add Customer</h2>
+
+      <input type="text" id="token" placeholder="Token Number">
+      <input type="text" id="ladyName" placeholder="Lady Name">
+      <input type="text" id="husbandName" placeholder="Husband Name">
+      <input type="text" id="phone" placeholder="Phone Number">
+      <input type="number" id="amount" placeholder="Loan Amount">
+      <input type="date" id="issueDate">
+
+      <button onclick="saveCustomer()">Save Customer</button>
+    </div>
+
+    <div class="card">
+  <h2>This Month Collections</h2>
+
+  <div id="collectionList"></div>
+</div>
+      <h2>Search Customer</h2>
+
+      <input type="text" id="searchToken" placeholder="Enter Token Number">
+      <button onclick="searchCustomer()">Search</button>
+
+      <div id="result"></div>
+    </div>
+    <div class="card">
+
+  <h2>Create Group</h2>
+
+  <input type="text" id="groupName" placeholder="Group Name">
+
+  <button onclick="createGroup()">
+    Create Group
+  </button>
+
+  <hr>
+
+  <input type="text" id="groupToken" placeholder="Customer Token">
+
+  <select id="groupSelect"></select>
+
+  <button onclick="addToGroup()">
+    Add Customer To Group
+  </button>
+
+  <hr>
+
+  <h3>Saved Groups</h3>
+
+  <div id="groupsList"></div>
+
+  <hr>
+
+  <h3>Group Members</h3>
+
+  <div id="groupMembers"></div>
+
+</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<div class="card">
+  <h2>Create Group</h2>
+
+  <input type="text" id="groupName" placeholder="Group Name">
+
+  <button onclick="createGroup()">Create Group</button>
+
+  <hr>
+
+  <input type="text" id="groupToken" placeholder="Customer Token">
+
+  <select id="groupSelect"></select>
+
+  <button onclick="addToGroup()">Add Customer To Group</button>
+</div>
