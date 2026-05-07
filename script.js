@@ -53,15 +53,7 @@ async function saveCustomer() {
   loadDashboard();
   loadCollections();
 }
-  customers.push(customer);
-
-  localStorage.setItem("customers", JSON.stringify(customers));
-
-  alert("Customer Saved!");
-  loadDashboard();
-
-  clearInputs();
-}
+  
 function clearInputs() {
   document.getElementById("token").value = "";
   document.getElementById("ladyName").value = "";
