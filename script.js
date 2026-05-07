@@ -199,9 +199,9 @@ async function loadDashboard() {
 }
 
 
-function loadCollections() {
+async function loadCollections() {
 
-  let customers = JSON.parse(localStorage.getItem("customers")) || [];
+  let customers = await getCustomers();
 
   let collectionHTML = "";
 
@@ -215,17 +215,13 @@ function loadCollections() {
 
         collectionHTML += `
           <div class="payment">
-            <p><strong>${customer.ladyName}</strong></p>
+            <p><strong>${customer.lady_name}</strong></p>
 
             <p>Token: ${customer.token}</p>
 
-            <p>Due Amount: ₹${customer.monthlyDue}</p>
+            <p>Due Amount: ₹${customer.monthly_due}</p>
 
             <p>Month: ${pendingPayment.month}</p>
-
-            <button onclick="markPaid('${customer.token}', ${pendingPayment.month - 1})">
-              Mark Paid
-            </button>
           </div>
         `;
       }
@@ -234,7 +230,6 @@ function loadCollections() {
 
   document.getElementById("collectionList").innerHTML = collectionHTML;
 }
-loadCollections();
 function createGroup() {
 
   const groupName = document.getElementById("groupName").value;
