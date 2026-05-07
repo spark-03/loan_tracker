@@ -5,6 +5,7 @@ const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+console.log("Supabase Connected");
 async function saveCustomer() {
 
   const token = document.getElementById("token").value;
